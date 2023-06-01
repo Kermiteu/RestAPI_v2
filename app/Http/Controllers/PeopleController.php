@@ -20,11 +20,11 @@ class PeopleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepeopleRequest $request): JsonResponse
+    public function store(StorePeopleRequest $request): JsonResponse
     {
         $people = People::create($request->all());
-        return reposnse()->json($people->id, 201);
-    }
+        return response()->json($people->id, 201);
+    }    
 
     /**
      * Display the specified resource.
@@ -37,18 +37,18 @@ class PeopleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepeopleRequest $request): JsonResponse
+    public function update(UpdatePeopleRequest $request)
     {
-        People::query()->findorfail($request->route('id')) ->update($request->all());
+        People::query()->findOrFail($request->route('id')) ->update($request->all());
         return response()->noContent(200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($id): JsonResposne
+    public function delete($id)
     {
-        People::query()->findorfail($id)->delete();
-        return response()-noContent(200);
+        People::query()->findOrFail($id)->delete();
+        return response()->noContent(204);
     }
 }
